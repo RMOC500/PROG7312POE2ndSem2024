@@ -1,0 +1,57 @@
+﻿<Window x:Class="PROG7312POE2ndSem2024.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PROG7312POE2ndSem2024"
+        mc:Ignorable="d"
+        Title="Community Services" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="RoundedButton">
+            <Setter Property="Background" Value="black" />
+            <Setter Property="Foreground" Value="white" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                            CornerRadius="5" 
+                            BorderBrush="White" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/Flag2.jpg" Opacity="1" />
+        </Grid.Background>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+            
+
+        <!-- Nav Bar -->
+        <StackPanel Orientation="Horizontal" Background="Black">
+            <Button Content="Home" Click="HomeButton_Click" Style="{StaticResource RoundedButton}" />
+            <Button Content="About" Click="AboutButton_Click" Style="{StaticResource RoundedButton}" />
+            <Button Content="News" Click="NewsButton_Click" Style="{StaticResource RoundedButton}" />
+
+        </StackPanel>
+
+        <!-- Main Content -->
+        <Frame x:Name="MainFrame" Grid.Row="1" Background="Transparent"/>
+        
+        </Grid>
+    
+</Window>

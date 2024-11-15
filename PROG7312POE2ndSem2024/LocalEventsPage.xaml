@@ -1,0 +1,43 @@
+﻿<Page x:Class="PROG7312POE2ndSem2024.LocalEventsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PROG7312POE2ndSem2024"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LocalEventsPage">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/flag2.jpg"  Opacity="1" />
+        </Grid.Background>
+
+       <Image Source="Images/MuniPhoto.jpg" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="123" Height="92" Margin="667,0,0,0" Opacity="0.5" RenderTransformOrigin="0.279,0.732"/>
+       <TextBlock Text="See Upcoming Municipal Events Near You" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Foreground="Black" TextWrapping="Wrap" />
+
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,70,0,0">
+            <!-- Date Picker so user can filter selecting a date -->
+            <DatePicker Name="DateSearch" Width="150" Margin="5,0,5,0" />
+
+            <!-- ComboBox for user to filtering a category -->
+            <ComboBox Name="Categorycmb" Width="150" Margin="5,0,5,0" />
+
+
+
+            <Button Content="Search" Width="100" Margin="5,0,5,0" Click="SearchButton_Click" Foreground="White" Background="Blue" />
+            </StackPanel>
+
+
+        <!-- ListView for the lcoal Events -->
+        <ListView Name="EventsListView" Margin="10,100,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Date" Width="200" DisplayMemberBinding="{Binding Date}" />
+                    <GridViewColumn Header="Description" Width="500" DisplayMemberBinding="{Binding Description}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Page>
