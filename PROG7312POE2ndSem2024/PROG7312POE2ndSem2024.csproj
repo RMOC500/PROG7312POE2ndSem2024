@@ -58,6 +58,7 @@
     <Compile Include="LocalEventsPage.xaml.cs">
       <DependentUpon>LocalEventsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Methods.cs" />
     <Compile Include="OrderStatus.xaml.cs">
       <DependentUpon>OrderStatus.xaml</DependentUpon>
     </Compile>

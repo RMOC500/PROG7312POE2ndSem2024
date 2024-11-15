@@ -48,8 +48,6 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
             <Button Name="RefreshButton" Content="Refresh" Width="110" Height="30" Margin="5" Click="RefreshButton_Click" 
                     Background="Black" Foreground="white" FontSize="16" FontFamily="Times New Roman" FontWeight="Bold"  />
-            <Button Name="DetailsButton" Content="Track That Request" Width="144" Height="30" Margin="5" Click="DetailsButton_Click" 
-                    Background="DarkRed" Foreground="White" FontSize="16" FontFamily="Times New Roman" FontWeight="Bold" />
         </StackPanel>
     </Grid>
 </Page>

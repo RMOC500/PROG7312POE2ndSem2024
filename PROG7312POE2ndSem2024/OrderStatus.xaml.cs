@@ -25,5 +25,16 @@ namespace PROG7312POE2ndSem2024
             InitializeComponent();
         }
 
+       
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            Methods.ShowWarning();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Methods.ShowWarning();
+        }
     }
 }

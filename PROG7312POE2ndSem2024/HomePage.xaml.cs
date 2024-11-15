@@ -38,15 +38,17 @@ namespace PROG7312POE2ndSem2024
         }
         private void imgStatus_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            ShowWarning();
+            NavigationService nav3 = NavigationService.GetNavigationService(this);
+            nav3.Navigate(new OrderStatus());
+            //ShowWarning();
         }
-        public static void ShowWarning()
+        /*public static void ShowWarning()
         {
             // Display a popup message with a yellow warning triangle in WPF
             MessageBox.Show(
                 "Currently under construction", "Warning",MessageBoxButton.OK, MessageBoxImage.Warning // This sets the yellow triangle icon
             );
         }
-
+        */  //Made a class for methods so they are accesible to all the xaml.cs 
         }
 }
