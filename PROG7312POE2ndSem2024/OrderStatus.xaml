@@ -36,7 +36,7 @@
         <ListView Name="ServiceRequestListView" Margin="10,120,10,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Tracking ID" Width="150" DisplayMemberBinding="{Binding TrackingID}" />
+                    <GridViewColumn Header="Tracking ID" Width="150" DisplayMemberBinding="{Binding RequestID}" />
                     <GridViewColumn Header="Details of issue" Width="476" DisplayMemberBinding="{Binding Description}" />
                     <GridViewColumn Header="Status" Width="150" DisplayMemberBinding="{Binding Status}" />
 

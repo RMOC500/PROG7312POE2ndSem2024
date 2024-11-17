@@ -30,6 +30,8 @@ namespace PROG7312POE2ndSem2024
         public string MediaPath { get; set; }
         public string Status { get; set; }
 
+        public string Details => $"Location: {Location}\nCategory: {Category}\nDescription: {Description}\nMedia Path: {MediaPath}";
+
         public ServiceRequestData(string location, string category, string description, string mediaPath)
         {
             RequestID = Guid.NewGuid().ToString().Substring(0, 8); // Generate unique ID
