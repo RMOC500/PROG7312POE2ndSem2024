@@ -27,16 +27,27 @@ namespace PROG7312POE2ndSem2024
             InitializeComponent();
         }
 
+        //Update for part 3 so that it can be cleared after issue was submitted
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Catgory drop down list functionality
+            // Category drop-down list functionality
             ComboBox comboBox = sender as ComboBox;
-            ComboBoxItem selectedItem = comboBox.SelectedItem as ComboBoxItem;
-            string selectedText = selectedItem.Content.ToString();
-            //3.User Feedback
-            //PopUp message to confirm users choice. 
-            MessageBox.Show("You selected: " + selectedText);
+
+            if (comboBox.SelectedItem is ComboBoxItem selectedItem) // Check if selectedItem is not null
+            {
+                string selectedText = selectedItem.Content.ToString();
+
+                // User feedback: Popup message to confirm user's choice
+                MessageBox.Show("You selected: " + selectedText);
+            }
+            else
+            {
+                // Optionally handle the case when no item is selected
+                MessageBox.Show("No category selected.");
+            }
         }
+
+
 
         private void btnAttachMedia_Click(object sender, RoutedEventArgs e)
         {
@@ -52,22 +63,73 @@ namespace PROG7312POE2ndSem2024
             }
         }
         //Submit the attached media
+
+
+        //-----------------------------------------------------------------------------------
+        //***I updated the code for this button for PART 3***
+        //***This is so it can generate output the TrackingID***
+        //-----------------------------------------------------------------------------------
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            //Save all user input to temp variables
-            string location = txtLocation.Text; 
+            // Save all user input to temporary variables
+            string location = txtLocation.Text;
             ComboBoxItem chosenCat = comboBox.SelectedItem as ComboBoxItem;
-            //Category can't be null user must choose an option
-            string category = chosenCat != null ? chosenCat.Content.ToString() : string.Empty; //conver and store chose as string
+            string category = chosenCat != null ? chosenCat.Content.ToString() : string.Empty;
             string description = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
 
+            // Validate inputs
+            if (string.IsNullOrWhiteSpace(location) || string.IsNullOrWhiteSpace(category) || string.IsNullOrWhiteSpace(description))
+            {
+                MessageBox.Show("Please fill in all fields before submitting the report.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-            //Output saved data to user 
-            //3.user Feedback
+            // Create a new ServiceRequest object
+            ServiceRequestData newRequest = new ServiceRequestData(location, category, description, filePath);
 
-            //I will output using messagebox since database has not yet been created in Part1
-            MessageBox.Show($"Location: {location}\nCategory: {category}\nDescription: {description}\nMedia Evidence: {filePath}\n\nReport submitted succesfully!");
+            // Save the new request to the central repository
+            ServiceRequestRepository.SaveServiceRequest(newRequest);
+
+            // Output saved data to the user
+            MessageBox.Show($"Report submitted successfully!\n\nTracking ID: {newRequest.RequestID}\n" +
+                            $"Location: {newRequest.Location}\nCategory: {newRequest.Category}\n" +
+                            $"Description: {newRequest.Description}\nMedia Evidence: {newRequest.MediaPath}");
+
+            // Clear form for new submission
+            ClearForm();
+
+            // Debug message to check count in ServiceRequestRepository
+            MessageBox.Show($"Total Requests Stored: {ServiceRequestRepository.GetServiceRequests().Count}");
         }
+
+
+
+        // Temporary storage for service requests (could be replaced with a database later)
+        private static List<ServiceRequestData> serviceRequests = new List<ServiceRequestData>();
+
+        private void SaveServiceRequest(ServiceRequestData request)
+        {
+            serviceRequests.Add(request); // Add the new request to the list
+        }
+
+        // Method to clear the form for another issue to be reported
+        //I implemented this in PART 3
+        private void ClearForm()
+        {
+            // Temporarily detach the SelectionChanged event
+            comboBox.SelectionChanged -= ComboBox_SelectionChanged;
+
+            txtLocation.Clear(); // Clear location textbox
+            comboBox.SelectedIndex = -1; // Reset the dropdown selection
+            richTextBox.Document.Blocks.Clear(); // Clear description
+            filePath = null; // clear attached media
+
+            // Reattach the SelectionChanged event
+            //This stops popup error
+            comboBox.SelectionChanged += ComboBox_SelectionChanged;
+        }
+
+
     }
 
     }

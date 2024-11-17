@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BinaryTrees.cs" />
     <Compile Include="LocalEventsPage.xaml.cs">
       <DependentUpon>LocalEventsPage.xaml</DependentUpon>
     </Compile>
@@ -65,6 +66,7 @@
     <Compile Include="ReportIssuePage.xaml.cs">
       <DependentUpon>ReportIssuePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ServiceRequestData.cs" />
     <Page Include="about.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

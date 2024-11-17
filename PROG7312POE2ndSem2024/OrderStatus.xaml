@@ -24,7 +24,7 @@
 
         <!-- Search Bar with Label Above TextBox -->
         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,64,470,0" Width="320">
-            <TextBlock Text="Enter Request ID:" Foreground="Black" FontWeight="Bold" Margin="5,0,0,5" />
+            <TextBlock Text="Enter Tracking ID:" Foreground="Black" FontWeight="Bold" Margin="5,0,0,5" />
             <StackPanel Orientation="Horizontal">
                 <TextBox x:Name="SearchTextBox" Width="200" Height="30" Margin="5,0,0,0" />
                 <Button x:Name="SearchButton" Content="Search" Width="100" Height="30" Margin="5,0,0,0" Click="SearchButton_Click" 
@@ -36,7 +36,7 @@
         <ListView Name="ServiceRequestListView" Margin="10,120,10,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Request ID" Width="150" DisplayMemberBinding="{Binding RequestID}" />
+                    <GridViewColumn Header="Tracking ID" Width="150" DisplayMemberBinding="{Binding TrackingID}" />
                     <GridViewColumn Header="Details of issue" Width="476" DisplayMemberBinding="{Binding Description}" />
                     <GridViewColumn Header="Status" Width="150" DisplayMemberBinding="{Binding Status}" />
 
