@@ -30,12 +30,12 @@ namespace PROG7312POE2ndSem2024
             string username = UsernameTextBox.Text;
             string password = PasswordBox.Password;
 
-            // Hardcoded admin credentials
+            // Hardcoded admin username and password
             if (username == "admin" && password == "password123")
             {
                 MessageBox.Show("Succesfull login!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Navigate to AdminStatus page
+                //got to admin status page on click
                 this.NavigationService.Navigate(new AdminStatus());
             }
             else

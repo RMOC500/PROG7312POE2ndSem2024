@@ -8,19 +8,23 @@ namespace PROG7312POE2ndSem2024
 {
     public class PriorityHeap
     {
+        // this list represents the heap
         private List<ServiceRequestData> heap = new List<ServiceRequestData>();
 
+        // add a reported issue to the heap
         public void Enqueue(ServiceRequestData request)
         {
             heap.Add(request);
             HeapifyUp(heap.Count - 1);
         }
 
+        // get all the issue and sort them by urgency
         public List<ServiceRequestData> getAll()
         {
             return heap.OrderByDescending(r => r.Priority).ToList();
         }
 
+        // this method pyhyically moves the row down if its a higher ugrency rating
         private void HeapifyUp(int i)
         {
             while (i > 0)
@@ -34,7 +38,7 @@ namespace PROG7312POE2ndSem2024
                 else break;
             }
         }
-
+        // this method pyhyically moves the row down if its lower ugrency rating
         private void HeapifyDown(int index)
         {
             int leftChild = 2 * index + 1;
@@ -54,6 +58,7 @@ namespace PROG7312POE2ndSem2024
             }
         }
 
+        // This is used to complete the swap of 2 issues in the list
         private void Switch(int indexA, int indexB)
         {
             var temp = heap[indexA];

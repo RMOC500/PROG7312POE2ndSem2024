@@ -25,28 +25,28 @@ namespace PROG7312POE2ndSem2024
         public OrderStatus()
         {
             InitializeComponent();
-            LoadServiceRequests(); // Load requests on page load
+            LoadServiceRequests(); 
         }
 
-        // Load all reported issues into the ListView
+        // put it into a listview
         private void LoadServiceRequests()
         {
-            // Clear and reinitialize the priority queue
+            
             ph = new PriorityHeap();
 
-            // Insert all service requests into the priority queue
+            // put reported issues inside priority queue
             foreach (var request in ServiceRequestRepository.GetServiceRequests())
             {
-                ph.Enqueue(request); // Corrected method
+                ph.Enqueue(request); 
             }
 
-            // Use the priority queue to display requests by their urgency
+            
             ServiceRequestListView.ItemsSource = ph.getAll();
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadServiceRequests(); // Refresh the ListView with updated data
+            LoadServiceRequests(); // refresh listview
             MessageBox.Show("List refreshed.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -60,7 +60,7 @@ namespace PROG7312POE2ndSem2024
                 return;
             }
 
-            var foundRequest = ph.getAll().FirstOrDefault(r => r.RequestID == searchID); // Using LINQ to search the heap
+            var foundRequest = ph.getAll().FirstOrDefault(r => r.RequestID == searchID); //Search throug the heap
             if (foundRequest != null)
             {
                 MessageBox.Show($"Request Found!\n\nTracking ID: {foundRequest.RequestID}\n" +

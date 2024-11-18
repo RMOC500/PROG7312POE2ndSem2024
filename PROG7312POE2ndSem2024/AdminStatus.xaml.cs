@@ -21,7 +21,7 @@ namespace PROG7312POE2ndSem2024
     public partial class AdminStatus : Page
     {
 
-        private ServiceRequestData thisR;
+        private ServiceRequestData thisR; // Holds the current service request being worked on
         public AdminStatus()
         {
             InitializeComponent();
@@ -29,14 +29,15 @@ namespace PROG7312POE2ndSem2024
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
+            // Get the tracking ID user input
             string trackingID = TrackingIDTextBox.Text.Trim();
-
+            // Check if tracking ID input is empty/null
             if (string.IsNullOrWhiteSpace(trackingID))
             {
                 MessageBox.Show("Please enter a valid Tracking ID.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
+            // Search for the request via the tracking ID my repository
             thisR = ServiceRequestRepository.GetServiceRequests().FirstOrDefault(r => r.RequestID == trackingID);
 
             if (thisR != null)
@@ -44,12 +45,14 @@ namespace PROG7312POE2ndSem2024
                 MessageBox.Show($"Request Found!\n\nTracking ID: {thisR.RequestID}\n" +
                                 $"Details: {thisR.Description}\nStatus: {thisR.Status}",
                                 "Search Result", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                // change status text in cmb box
                 StatusComboBox.SelectedItem = StatusComboBox.Items.Cast<ComboBoxItem>().FirstOrDefault(i => i.Content.ToString() == thisR.Status);
             }
             else
             {
                 MessageBox.Show("No request with this ID.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                thisR = null; // Reset current request
+                thisR = null; 
             }
         }
 
@@ -60,7 +63,7 @@ namespace PROG7312POE2ndSem2024
                 MessageBox.Show("Please search for a request before updating the status.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-
+            // Get the selected status from the combo box
             ComboBoxItem selectedStatus = StatusComboBox.SelectedItem as ComboBoxItem;
 
             if (selectedStatus == null)

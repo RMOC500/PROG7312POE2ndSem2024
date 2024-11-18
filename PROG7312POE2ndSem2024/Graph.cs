@@ -14,7 +14,7 @@ namespace PROG7312POE2ndSem2024
         {
             adjacencyList = new Dictionary<string, List<string>>();
         }
-        // Add a node (status)
+        // plus 1 node (status)
         public void AddStatus(string status)
         {
             if (!adjacencyList.ContainsKey(status))
@@ -23,7 +23,7 @@ namespace PROG7312POE2ndSem2024
             }
         }
 
-        // Add an edge (valid transition)
+        // plus 1 edge 
         public void AddTransition(string fromStatus, string toStatus)
         {
             if (adjacencyList.ContainsKey(fromStatus) && !adjacencyList[fromStatus].Contains(toStatus))
@@ -32,13 +32,13 @@ namespace PROG7312POE2ndSem2024
             }
         }
 
-        // Check if a transition is valid
+        // check if its a valid transition or not
         public bool IsValidTransition(string fromStatus, string toStatus)
         {
             return adjacencyList.ContainsKey(fromStatus) && adjacencyList[fromStatus].Contains(toStatus);
         }
 
-        // Get all valid transitions from a status
+        //fetch all the valid tranasctions
         public List<string> GetValidTransitions(string status)
         {
             return adjacencyList.ContainsKey(status) ? adjacencyList[status] : new List<string>();

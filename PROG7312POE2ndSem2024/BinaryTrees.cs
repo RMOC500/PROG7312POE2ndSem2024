@@ -8,28 +8,29 @@ namespace PROG7312POE2ndSem2024
 {
     public class BinaryTrees
     {
+        //  this is the node in the binary tree
         private class Node
         {
-            public ServiceRequestData Request;
+            public ServiceRequestData Request; // Stores the data
             public Node Left, Right;
 
             public Node(ServiceRequestData request)
             {
                 Request = request;
-                Left = Right = null;
+                Left = Right = null; // make children equal to null
             }
         }
 
-        private Node root;
+        private Node root; // Root node of the binary tree
 
-        public void Insert(ServiceRequestData request)
+        public void Insert(ServiceRequestData request) 
         {
-            root = Insert(root, request);
+            root = Insert(root, request); 
         }
 
         private Node Insert(Node node, ServiceRequestData request)
         {
-            if (node == null) return new Node(request);
+            if (node == null) return new Node(request); // if spot empyty create a new node
 
             int comparison = string.Compare(request.RequestID, node.Request.RequestID, StringComparison.Ordinal);
             if (comparison < 0) node.Left = Insert(node.Left, request);
@@ -38,6 +39,7 @@ namespace PROG7312POE2ndSem2024
             return node;
         }
 
+        // Search for a request in the tree via Tracking ID
         public ServiceRequestData Search(string requestId)
         {
             return Search(root, requestId);
@@ -49,8 +51,8 @@ namespace PROG7312POE2ndSem2024
 
             int comparison = string.Compare(requestId, node.Request.RequestID, StringComparison.Ordinal);
             if (comparison == 0) return node.Request;
-            if (comparison < 0) return Search(node.Left, requestId);
-            return Search(node.Right, requestId);
+            if (comparison < 0) return Search(node.Left, requestId); // Search left
+            return Search(node.Right, requestId);// Search right
         }
 
         public List<ServiceRequestData> InOrderTraversal()

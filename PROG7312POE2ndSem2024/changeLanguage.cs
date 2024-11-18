@@ -14,7 +14,7 @@ namespace PROG7312POE2ndSem2024
         private static bool restartApp = false;
         public static void SetLanguage(string cultureCode)
         {
-            // Set the culture for the application
+            
             CultureInfo culture = new CultureInfo(cultureCode);
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;

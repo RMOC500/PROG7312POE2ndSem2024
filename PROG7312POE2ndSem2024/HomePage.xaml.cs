@@ -82,7 +82,19 @@ namespace PROG7312POE2ndSem2024
             NavigationService nav4 = NavigationService.GetNavigationService(this);
             nav4.Navigate(new AdminLogin());
         }
-        /*public static void ShowWarning()
+       
+    }
+}
+
+
+
+
+
+
+
+
+
+/*public static void ShowWarning()
 {
 // Display a popup message with a yellow warning triangle in WPF
 MessageBox.Show(
@@ -90,5 +102,3 @@ MessageBox.Show(
 );
 }
 */  //Made a class for methods so they are accesible to all the xaml.cs 
-    }
-}
