@@ -2,17 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PROG7312POE2ndSem2024
 {
@@ -22,60 +14,45 @@ namespace PROG7312POE2ndSem2024
     public partial class ReportIssuePage : Page
     {
         private string filePath;
+
         public ReportIssuePage()
         {
             InitializeComponent();
         }
 
-        //Update for part 3 so that it can be cleared after issue was submitted
+        // Event to show category selection message
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Category drop-down list functionality
-            ComboBox comboBox = sender as ComboBox;
-
-            if (comboBox.SelectedItem is ComboBoxItem selectedItem) // Check if selectedItem is not null
+            if (comboBox.SelectedItem is ComboBoxItem selectedItem)
             {
                 string selectedText = selectedItem.Content.ToString();
-
-                // User feedback: Popup message to confirm user's choice
                 MessageBox.Show("You selected: " + selectedText);
-            }
-            else
-            {
-                // Optionally handle the case when no item is selected
-                MessageBox.Show("No category selected.");
             }
         }
 
-
-
+        // Attach media file
         private void btnAttachMedia_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Filter = "Images files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|Document files (*.pdf;*.docx)|*.pdf;*.docx";
-            
+            OpenFileDialog openFile = new OpenFileDialog
+            {
+                Filter = "Images files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|Document files (*.pdf;*.docx)|*.pdf;*.docx"
+            };
+
             if (openFile.ShowDialog() == true)
             {
                 filePath = openFile.FileName;
-                //3.User Feedback
-                //Confirms the file choice by showing user the file path they chose
                 MessageBox.Show("File chosen: " + filePath);
             }
         }
-        //Submit the attached media
 
-
-        //-----------------------------------------------------------------------------------
-        //***I updated the code for this button for PART 3***
-        //***This is so it can generate output the TrackingID***
-        //-----------------------------------------------------------------------------------
+        // Submit report
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            // Save all user input to temporary variables
+            // Collect form inputs
             string location = txtLocation.Text;
             ComboBoxItem chosenCat = comboBox.SelectedItem as ComboBoxItem;
-            string category = chosenCat != null ? chosenCat.Content.ToString() : string.Empty;
-            string description = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text;
+            string category = chosenCat?.Content.ToString() ?? string.Empty;
+            string description = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd).Text.Trim();
 
             // Validate inputs
             if (string.IsNullOrWhiteSpace(location) || string.IsNullOrWhiteSpace(category) || string.IsNullOrWhiteSpace(description))
@@ -84,53 +61,65 @@ namespace PROG7312POE2ndSem2024
                 return;
             }
 
-            // Create a new ServiceRequest object
-            ServiceRequestData newRequest = new ServiceRequestData(location, category, description, filePath);
+            // Determine priority and create new service request
+            int priority = DeterminePriority(category);
+            var newRequest = new ServiceRequestData(location, category, description, filePath, priority);
 
-            // Save the new request to the central repository
+            // Save and provide feedback
             ServiceRequestRepository.SaveServiceRequest(newRequest);
-
-            // Output saved data to the user
             MessageBox.Show($"Report submitted successfully!\n\nTracking ID: {newRequest.RequestID}\n" +
                             $"Location: {newRequest.Location}\nCategory: {newRequest.Category}\n" +
-                            $"Description: {newRequest.Description}\nMedia Evidence: {newRequest.MediaPath}");
+                            $"Priority: {priority}\nDescription: {newRequest.Description}\nMedia: {newRequest.MediaPath}");
 
-            // Clear form for new submission
+            // Clear form for next submission
             ClearForm();
-
-            // Debug message to check count in ServiceRequestRepository
             MessageBox.Show($"Total Requests Stored: {ServiceRequestRepository.GetServiceRequests().Count}");
         }
 
-
-
-        // Temporary storage for service requests (could be replaced with a database later)
-        private static List<ServiceRequestData> serviceRequests = new List<ServiceRequestData>();
-
-        private void SaveServiceRequest(ServiceRequestData request)
-        {
-            serviceRequests.Add(request); // Add the new request to the list
-        }
-
-        // Method to clear the form for another issue to be reported
-        //I implemented this in PART 3
+        // Method to clear form inputs
         private void ClearForm()
         {
-            // Temporarily detach the SelectionChanged event
             comboBox.SelectionChanged -= ComboBox_SelectionChanged;
 
-            txtLocation.Clear(); // Clear location textbox
-            comboBox.SelectedIndex = -1; // Reset the dropdown selection
-            richTextBox.Document.Blocks.Clear(); // Clear description
-            filePath = null; // clear attached media
+            txtLocation.Clear();
+            comboBox.SelectedIndex = -1;
+            richTextBox.Document.Blocks.Clear();
+            filePath = null;
 
-            // Reattach the SelectionChanged event
-            //This stops popup error
             comboBox.SelectionChanged += ComboBox_SelectionChanged;
         }
 
+        // Assign priority based on category
+        private int DeterminePriority(string category)
+        {
+            //This switch statements ranks the categories of the issues based on urgency
+            //3 being most urgent and need to be fixed ASAP and
+            //1 being least urgent and will take some time
+            switch (category)
+            {
+                case "Flooding":
+                case "Explosion":
+                case "Contaminated Water":
+                    return 3;
 
+                case "Broken Traffic Light":
+                case "Burst Pipe":
+                case "Road Collapse":
+                case "Electricity Outage":
+                case "No Water":
+                case "Gas Leak":
+                    return 2;
+
+                case "Potholes":
+                case "Streetlight Not Working":
+                case "Trash Overflow":
+                case "Graffiti":
+                case "Noise Complaint":
+                    return 1;
+
+                default:
+                    return 1;
+            }
+        }
     }
-
-    }
-
+}

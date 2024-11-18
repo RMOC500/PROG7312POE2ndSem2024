@@ -20,7 +20,7 @@ namespace PROG7312POE2ndSem2024
     /// </summary>
     public partial class OrderStatus : Page
     {
-        private BinaryTrees requestTree = new BinaryTrees(); // Instantiate the BST
+        private PriorityHeap ph = new PriorityHeap();
 
         public OrderStatus()
         {
@@ -28,20 +28,20 @@ namespace PROG7312POE2ndSem2024
             LoadServiceRequests(); // Load requests on page load
         }
 
-        // Load all service requests into the ListView
+        // Load all reported issues into the ListView
         private void LoadServiceRequests()
         {
-            // Clear the tree before reloading
-            requestTree = new BinaryTrees();
+            // Clear and reinitialize the priority queue
+            ph = new PriorityHeap();
 
-            // Insert all service requests into the tree
+            // Insert all service requests into the priority queue
             foreach (var request in ServiceRequestRepository.GetServiceRequests())
             {
-                requestTree.Insert(request);
+                ph.Enqueue(request); // Corrected method
             }
 
-            // Use in-order traversal to display data in sorted order
-            ServiceRequestListView.ItemsSource = requestTree.InOrderTraversal();
+            // Use the priority queue to display requests by their urgency
+            ServiceRequestListView.ItemsSource = ph.getAll();
         }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
@@ -60,7 +60,7 @@ namespace PROG7312POE2ndSem2024
                 return;
             }
 
-            var foundRequest = requestTree.Search(searchID);
+            var foundRequest = ph.getAll().FirstOrDefault(r => r.RequestID == searchID); // Using LINQ to search the heap
             if (foundRequest != null)
             {
                 MessageBox.Show($"Request Found!\n\nTracking ID: {foundRequest.RequestID}\n" +

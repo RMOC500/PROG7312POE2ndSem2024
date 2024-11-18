@@ -63,6 +63,7 @@
     <Compile Include="OrderStatus.xaml.cs">
       <DependentUpon>OrderStatus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PriorityHeap.cs" />
     <Compile Include="ReportIssuePage.xaml.cs">
       <DependentUpon>ReportIssuePage.xaml</DependentUpon>
     </Compile>

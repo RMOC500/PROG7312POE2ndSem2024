@@ -29,17 +29,19 @@ namespace PROG7312POE2ndSem2024
         public string Description { get; set; }
         public string MediaPath { get; set; }
         public string Status { get; set; }
+        public int Priority { get; set; } // added this for priority heap
 
         public string Details => $"Location: {Location}\nCategory: {Category}\nDescription: {Description}\nMedia Path: {MediaPath}";
 
-        public ServiceRequestData(string location, string category, string description, string mediaPath)
+        public ServiceRequestData(string location, string category, string description, string mediaPath, int priority)
         {
             RequestID = Guid.NewGuid().ToString().Substring(0, 8); // Generate unique ID
             Location = location;
             Category = category;
             Description = description;
             MediaPath = mediaPath;
-            Status = "Pending"; // Default status
+            Status = "Pending"; // Default status after submitting
+            Priority = priority;  // Assign priority during creation
         }
     }
 }

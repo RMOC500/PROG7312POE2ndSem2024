@@ -17,9 +17,20 @@
         <TextBlock x:Name="tbLocation" HorizontalAlignment="Left" Margin="205,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="95" FontFamily="Times New Roman" FontSize="20" Foreground="black" FontWeight="Bold"><Run Language="en-za" Text="Location:"/></TextBlock>
         <TextBlock x:Name="tbCategory" HorizontalAlignment="Left" Margin="205,122,0,0" TextWrapping="Wrap" Text="Category:" VerticalAlignment="Top" Height="24" Width="95" FontFamily="Times New Roman" FontSize="20" Foreground="black" FontWeight="Bold"/>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="445,122,0,0" VerticalAlignment="Top" Height="24" Width="150" SelectionChanged="ComboBox_SelectionChanged">
-            <ComboBoxItem Content="Sanitation"/>
-            <ComboBoxItem Content="Roads"/>
-            <ComboBoxItem Content="Utilities"/>
+            <ComboBoxItem Content="Flooding" />
+            <ComboBoxItem Content="Explosion" />
+            <ComboBoxItem Content="No Water" />
+            <ComboBoxItem Content="Electricity Outage" />
+            <ComboBoxItem Content="Contaminated Water" />
+            <ComboBoxItem Content="Broken Traffic Light" />
+            <ComboBoxItem Content="Burst Pipe" />
+            <ComboBoxItem Content="Road Collapse" />
+            <ComboBoxItem Content="Gas Leak" />
+            <ComboBoxItem Content="Potholes" />
+            <ComboBoxItem Content="Streetlight Not Working" />
+            <ComboBoxItem Content="Trash Overflow" />
+            <ComboBoxItem Content="Graffiti" />
+            <ComboBoxItem Content="Noise Complaint" />
         </ComboBox>
         <TextBlock x:Name="tbDescription" HorizontalAlignment="Left" Margin="205,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" Width="195" FontFamily="Times New Roman" FontSize="20" Foreground="black" FontWeight="Bold"><Run Language="en-za" Text="Provide a description:"/></TextBlock>
         <RichTextBox x:Name="richTextBox" Margin="445,160,24,188" Panel.ZIndex="1">
