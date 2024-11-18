@@ -110,11 +110,15 @@ namespace PROG7312POE2ndSem2024
                 case "Gas Leak":
                     return 2;
 
-                case "Potholes":
+                case "Basic Roadworks":
+                case "potholes":
+                case "basic utilities":
+                case "minor sanitation problems":
                 case "Streetlight Not Working":
                 case "Trash Overflow":
                 case "Graffiti":
-                case "Noise Complaint":
+                case "litter":               
+                case "Noise pollution":
                     return 1;
 
                 default:

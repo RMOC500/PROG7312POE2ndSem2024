@@ -12,7 +12,8 @@
         <Grid.Background>
             <ImageBrush ImageSource="Images/flag2.jpg"  Opacity="1" />
         </Grid.Background>
-        <TextBlock x:Name="tb" HorizontalAlignment="Left" Margin="32,18,0,0" TextWrapping="Wrap" Text="Request Service/Report Issue"  VerticalAlignment="Top" Height="24" Width="251" FontFamily="Times New Roman" FontSize="20" Foreground="black" FontWeight="Bold"/>
+        <Button Content="Admin Login" HorizontalAlignment="Left" Margin="445,285,0,0" VerticalAlignment="Top" Width="150" Height="24" Click="AdminButton_Click" Foreground="White" Background="DarkOliveGreen"  />
+        <TextBlock x:Name="tbService" HorizontalAlignment="Left" Margin="32,18,0,0" TextWrapping="Wrap" Text="Request Service/Report Issue"  VerticalAlignment="Top" Height="24" Width="251" FontFamily="Times New Roman" FontSize="20" Foreground="black" FontWeight="Bold"/>
         <Image x:Name="serviceImg" HorizontalAlignment="Left" Height="101" Margin="36,47,0,0" VerticalAlignment="Top" Width="136" Source="/serviceStockPhoto.jpg" MouseLeftButtonUp="ServiceImg_MouseLeftButtonUp"/>
         <TextBlock x:Name="tbEvents" HorizontalAlignment="Left" Margin="36,148,0,0" TextWrapping="Wrap" Text="Local Events" Height="24" Width="144" FontFamily="Times New Roman" FontSize="20" Foreground="black" FontWeight="Bold" VerticalAlignment="Top"/>
         <Image x:Name="imgEvent" HorizontalAlignment="Left" Height="101" Margin="32,180,0,0" VerticalAlignment="Top" Width="136" Source="/LocalEventsStockImage.jpg" MouseLeftButtonUp="imgEvent_MouseLeftButtonUp"/>
@@ -20,5 +21,21 @@
         <Image x:Name="imgStatus" HorizontalAlignment="Left" Height="102" Margin="36,305,0,0" VerticalAlignment="Top" Width="117" Source="/statusStock.png" MouseLeftButtonUp="imgStatus_MouseLeftButtonUp"/>
         <TextBlock x:Name="tvHomeHeading" HorizontalAlignment="Center" Margin="0,412,0,0" TextWrapping="Wrap" Text="[Choose an option by clicking on the photo.]" VerticalAlignment="Top" Width="268" Height="28"  FontFamily="Times New Roman" FontSize="14" Foreground="WhiteSmoke"  />
         <Image Source="Images/MuniPhoto.jpg" HorizontalAlignment="Left" VerticalAlignment="Top"  Width="123" Height="92" Margin="667,0,0,0" Opacity="0.5" RenderTransformOrigin="0.279,0.732"/>
+
+        <ComboBox x:Name="languagecmb" 
+          HorizontalAlignment="Left" 
+          Margin="445,356,0,0" 
+          VerticalAlignment="Top" 
+          Width="160" 
+          Height="27" 
+          SelectionChanged="languagecmb_SelectionChanged">
+            <ComboBoxItem Content="English" IsSelected="True" />
+            <ComboBoxItem Content="Afrikaans" />
+            <ComboBoxItem Content="Xhosa" />
+
+        </ComboBox>
+
+        <TextBlock x:Name="tb_Copy" HorizontalAlignment="Left" Margin="445,324,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="24" Width="160" FontFamily="Times New Roman" FontSize="20" Foreground="black" FontWeight="Bold"><Run Language="en-za" Text="Choose Language"/></TextBlock>
+
     </Grid>
 </Page>
