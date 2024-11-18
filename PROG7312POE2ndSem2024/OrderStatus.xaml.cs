@@ -20,21 +20,57 @@ namespace PROG7312POE2ndSem2024
     /// </summary>
     public partial class OrderStatus : Page
     {
+        private PriorityHeap ph = new PriorityHeap();
+
         public OrderStatus()
         {
             InitializeComponent();
+            LoadServiceRequests(); 
         }
 
-       
+        // put it into a listview
+        private void LoadServiceRequests()
+        {
+            
+            ph = new PriorityHeap();
+
+            // put reported issues inside priority queue
+            foreach (var request in ServiceRequestRepository.GetServiceRequests())
+            {
+                ph.Enqueue(request); 
+            }
+
+            
+            ServiceRequestListView.ItemsSource = ph.getAll();
+        }
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            Methods.ShowWarning();
+            LoadServiceRequests(); // refresh listview
+            MessageBox.Show("List refreshed.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            Methods.ShowWarning();
+            string searchID = SearchTextBox.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(searchID))
+            {
+                MessageBox.Show("Please enter a Tracking ID.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var foundRequest = ph.getAll().FirstOrDefault(r => r.RequestID == searchID); //Search throug the heap
+            if (foundRequest != null)
+            {
+                MessageBox.Show($"Request Found!\n\nTracking ID: {foundRequest.RequestID}\n" +
+                                $"Details: {foundRequest.Description}\nStatus: {foundRequest.Status}",
+                                "Search Result", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("No request found with the given Tracking ID.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

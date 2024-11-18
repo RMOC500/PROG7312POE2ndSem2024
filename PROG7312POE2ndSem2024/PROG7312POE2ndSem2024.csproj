@@ -55,6 +55,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminLogin.xaml.cs">
+      <DependentUpon>AdminLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminStatus.xaml.cs">
+      <DependentUpon>AdminStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BinaryTrees.cs" />
+    <Compile Include="changeLanguage.cs" />
+    <Compile Include="Graph.cs" />
+    <Compile Include="langstrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>langstrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="LocalEventsPage.xaml.cs">
       <DependentUpon>LocalEventsPage.xaml</DependentUpon>
     </Compile>
@@ -62,10 +76,20 @@
     <Compile Include="OrderStatus.xaml.cs">
       <DependentUpon>OrderStatus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PriorityHeap.cs" />
     <Compile Include="ReportIssuePage.xaml.cs">
       <DependentUpon>ReportIssuePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ServiceRequestData.cs" />
     <Page Include="about.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminStatus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,6 +149,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="langstrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>langstrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
